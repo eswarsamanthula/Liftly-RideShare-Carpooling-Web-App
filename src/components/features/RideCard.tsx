@@ -55,7 +55,7 @@ export default function RideCard({ ride }: RideCardProps) {
   };
 
   return (
-    <div className="border rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
+    <div className="border rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow mt-16">
       <div className="p-4 grid grid-cols-[1fr_auto] gap-4">
         <div className="space-y-4">
           <div className="flex items-center space-x-4">

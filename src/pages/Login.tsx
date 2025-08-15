@@ -161,7 +161,7 @@ const Login = () => {
   
   return (
     <Layout>
-      <div className="container py-12 px-4 md:px-6">
+      <div className="container py-12 px-4 md:px-6 mt-16">
         <div className="max-w-md mx-auto">
           {step === 'credentials' ? (
             <Card className="shadow-2xl border-0 bg-gradient-to-br from-white to-blue-50">

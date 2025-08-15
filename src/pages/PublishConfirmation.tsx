@@ -74,7 +74,7 @@ const PublishConfirmation = () => {
   
   return (
     <Layout>
-      <div className="container py-8 px-4 md:px-6">
+      <div className="container py-8 px-4 md:px-6 mt-16">
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div className="p-6">
