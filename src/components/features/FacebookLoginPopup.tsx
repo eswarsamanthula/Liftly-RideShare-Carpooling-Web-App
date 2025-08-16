@@ -20,27 +20,27 @@ interface FacebookLoginPopupProps {
 const FacebookLoginPopup: React.FC<FacebookLoginPopupProps> = ({ onAccountSelect, onClose }) => {
   const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
 
-  // Mock Facebook accounts with your specified emails
-  const accounts: FacebookAccount[] = [
-    {
-      id: '1',
-      name: 'M V S Nitheesh Reddy',
-      email: 'mvsnitheeshreddy@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face'
-    },
-    {
-      id: '2',
-      name: 'Palluru Mouli',
-      email: 'pallurumouli18@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face'
-    },
-    {
-      id: '3',
-      name: 'Boyada Rshan Reddy',
-      email: 'boyadarshanreddy@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=40&h=40&fit=crop&crop=face'
-    }
-  ];
+const accounts: FacebookAccount[] = [
+  {
+    id: '1',
+    name: 'Ananya Sharma',
+    email: 'ananya.sharma@example.com',
+    avatar: 'https://images.unsplash.com/photo-1603415526960-f36c82f2f84c?w=40&h=40&fit=crop&crop=face'
+  },
+  {
+    id: '2',
+    name: 'Rohan Mehta',
+    email: 'rohan.mehta@example.com',
+    avatar: 'https://images.unsplash.com/photo-1603415526829-0f8e7a7d1f5c?w=40&h=40&fit=crop&crop=face'
+  },
+  {
+    id: '3',
+    name: 'Sanya Kapoor',
+    email: 'sanya.kapoor@example.com',
+    avatar: 'https://images.unsplash.com/photo-1603415527000-8a30e9b19a2f?w=40&h=40&fit=crop&crop=face'
+  }
+];
+
 
   const handleAccountClick = (account: FacebookAccount) => {
     setSelectedAccount(account.id);

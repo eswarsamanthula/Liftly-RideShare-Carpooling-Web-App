@@ -46,8 +46,7 @@ const HomePage = () => {
       </h1>
       
       <p className="text-xl md:text-2xl mb-12 text-blue-100/90 max-w-4xl mx-auto leading-relaxed font-medium">
-        Join trusted drivers and fellow travelers for safe, budget-friendly, and planet-friendly trips anywhere in the country.
-      </p>
+        Travel safe, save money, and go green—anywhere in the country, with people you can trust.      </p>
     </div>
     
     {/* Enhanced Search Bar Section */}

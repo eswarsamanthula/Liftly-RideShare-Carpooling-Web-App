@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
@@ -58,11 +57,8 @@ export default function OTPVerification({
     }
 
     setIsVerifying(true);
-    console.log('🔐 Attempting to verify OTP:', otp, 'for email:', email);
-    
     try {
       if (type === 'forgot-password') {
-        console.log('🔍 Verifying forgot password OTP...');
         const result = await onVerificationSuccess(otp);
         if (result) {
           toast({
@@ -71,8 +67,6 @@ export default function OTPVerification({
           });
         }
       } else {
-        // For other types, use mock verification (backward compatibility)
-        console.log('🔍 Using mock verification for type:', type);
         await new Promise(resolve => setTimeout(resolve, 2000));
         toast({
           title: "Verification Successful",
@@ -81,7 +75,6 @@ export default function OTPVerification({
         onVerificationSuccess();
       }
     } catch (error: any) {
-      console.error('❌ OTP verification failed:', error);
       toast({
         title: "Verification Failed",
         description: error.message || "Invalid OTP. Please try again.",
@@ -94,15 +87,10 @@ export default function OTPVerification({
 
   const handleResendOTP = async () => {
     setIsResending(true);
-    console.log('📧 Attempting to resend OTP to:', email);
-    
     try {
       if (type === 'forgot-password') {
-        console.log('📤 Sending forgot password OTP...');
         await emailService.sendForgotPasswordOTP(email);
       } else {
-        // Mock resend for other types
-        console.log('📤 Mock resend for type:', type);
         await new Promise(resolve => setTimeout(resolve, 1000));
       }
       
@@ -113,9 +101,7 @@ export default function OTPVerification({
         title: "OTP Resent",
         description: "New verification code sent to your email",
       });
-      console.log('✅ OTP resent successfully');
     } catch (error: any) {
-      console.error('❌ Failed to resend OTP:', error);
       toast({
         title: "Resend Failed",
         description: error.message || "Failed to resend OTP. Please try again.",
@@ -142,38 +128,33 @@ export default function OTPVerification({
       </CardHeader>
       
       <CardContent className="space-y-6">
-        <div className="space-y-4">
-          <div className="flex justify-center">
-            <InputOTP value={otp} onChange={setOtp} maxLength={6}>
-              <InputOTPGroup>
-                <InputOTPSlot index={0} className="w-12 h-12 text-lg font-semibold border-2 focus:border-blue-500 transition-colors" />
-                <InputOTPSlot index={1} className="w-12 h-12 text-lg font-semibold border-2 focus:border-blue-500 transition-colors" />
-                <InputOTPSlot index={2} className="w-12 h-12 text-lg font-semibold border-2 focus:border-blue-500 transition-colors" />
-                <InputOTPSlot index={3} className="w-12 h-12 text-lg font-semibold border-2 focus:border-blue-500 transition-colors" />
-                <InputOTPSlot index={4} className="w-12 h-12 text-lg font-semibold border-2 focus:border-blue-500 transition-colors" />
-                <InputOTPSlot index={5} className="w-12 h-12 text-lg font-semibold border-2 focus:border-blue-500 transition-colors" />
-              </InputOTPGroup>
-            </InputOTP>
-          </div>
-          
-          <div className="text-center">
-            {!canResend ? (
-              <div className="flex items-center justify-center space-x-2 text-gray-600">
-                <Clock className="h-4 w-4" />
-                <span className="text-sm">Resend OTP in {countdown}s</span>
-              </div>
-            ) : (
-              <Button
-                variant="ghost"
-                onClick={handleResendOTP}
-                disabled={isResending}
-                className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 transition-all duration-200"
-              >
-                <RefreshCw className={`h-4 w-4 mr-2 ${isResending ? 'animate-spin' : ''}`} />
-                {isResending ? 'Sending...' : 'Resend OTP'}
-              </Button>
-            )}
-          </div>
+        <div className="flex justify-center">
+          <InputOTP value={otp} onChange={setOtp} maxLength={6}>
+            <InputOTPGroup>
+              {[0,1,2,3,4,5].map(i => (
+                <InputOTPSlot key={i} index={i} className="w-12 h-12 text-lg font-semibold border-2 focus:border-blue-500 transition-colors" />
+              ))}
+            </InputOTPGroup>
+          </InputOTP>
+        </div>
+        
+        <div className="text-center">
+          {!canResend ? (
+            <div className="flex items-center justify-center space-x-2 text-gray-600">
+              <Clock className="h-4 w-4" />
+              <span className="text-sm">Resend OTP in {countdown}s</span>
+            </div>
+          ) : (
+            <Button
+              variant="ghost"
+              onClick={handleResendOTP}
+              disabled={isResending}
+              className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 transition-all duration-200"
+            >
+              <RefreshCw className={`h-4 w-4 mr-2 ${isResending ? 'animate-spin' : ''}`} />
+              {isResending ? 'Sending...' : 'Resend OTP'}
+            </Button>
+          )}
         </div>
         
         <div className="space-y-3">

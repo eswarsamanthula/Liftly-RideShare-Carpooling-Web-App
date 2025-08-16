@@ -1,5 +1,5 @@
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
 import { RideProvider } from './contexts/RideContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { MessageProvider } from './contexts/MessageContext';
@@ -26,7 +26,12 @@ import NotFound from './pages/NotFound';
 import ContactDriver from './pages/ContactDriver';
 import PublishedRideDetails from './pages/PublishedRideDetails';
 
+// Optional: Google Login Popup
+import GoogleLoginPopup from './components/features/GoogleLoginPopup';
+
 function App() {
+  const [showGooglePopup, setShowGooglePopup] = useState(false);
+
   useEffect(() => {
     const preloader = document.getElementById('preloader');
     const mainContent = document.getElementById('main-content');
@@ -42,25 +47,31 @@ function App() {
     });
   }, []);
 
+  const handleGoogleAccountSelect = (account: any) => {
+    console.log('Logged in user:', account);
+    setShowGooglePopup(false);
+    // You can store the account in AuthContext or localStorage
+  };
+
   return (
     <Router>
       <ThemeProvider defaultTheme="system" storageKey="rideshare-ui-theme">
         <AuthProvider>
           <MessageProvider>
             <RideProvider>
+              {/* Preloader */}
               <div
                 id="preloader"
-                className="fixed inset-0 z-50  backdrop-blur-md flex items-center justify-center transition-opacity duration-700"
+                className="fixed inset-0 z-50 backdrop-blur-md flex items-center justify-center transition-opacity duration-700"
               >
-                {/* Show logo or text */}
                 <img
                   src={Logo}
                   alt="Lifty Logo"
                   className="h-24 w-24 animate-fade-in-out"
                 />
-                {/* Or use text: */}
-                {/* <h1 className="text-5xl sm:text-7xl font-bold text-gray-300 handwritten animate-fade-in-out">Lifty</h1> */}
               </div>
+
+              {/* Main content */}
               <div
                 id="main-content"
                 className="invisible opacity-0 transition-opacity duration-700"
@@ -96,7 +107,17 @@ function App() {
                   <Route path="/contact" element={<Contact />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
+
+                {/* Toaster for notifications */}
                 <Toaster />
+
+                {/* Optional Google Login Popup */}
+                {showGooglePopup && (
+                  <GoogleLoginPopup
+                    onAccountSelect={handleGoogleAccountSelect}
+                    onClose={() => setShowGooglePopup(false)}
+                  />
+                )}
               </div>
             </RideProvider>
           </MessageProvider>

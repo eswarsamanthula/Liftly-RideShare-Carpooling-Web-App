@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { Menu, X, User, LogOut, Car, MessageSquare, Search, ChevronDown } from 'lucide-react';
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -62,7 +61,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav id="navbar" className="fixed top-3 left-4 right-4 z-50  backdrop-blur-md text-white px-4 py-0 rounded-[16px] shadow-md transition-transform duration-300 transform ">
+    <nav id="navbar" className="fixed top-1 left-4 right-4 z-50  backdrop-blur-md text-white px-4 py-0 rounded-[16px] shadow-md transition-transform duration-300 transform ">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -86,8 +85,6 @@ export default function Navbar() {
             <Button variant="ghost" onClick={() => handleNavigation('/contact')} className="text-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
               Contact
             </Button>
-
-            <ThemeToggle />
 
             {user ? (
               <DropdownMenu>
@@ -137,9 +134,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex items-center space-x-2 md:hidden">
-            <ThemeToggle />
-            <Button 
+          <div className="flex items-center space-x-2 md:hidden">            <Button 
               variant="ghost" 
               size="icon"
               onClick={handleMobileMenuToggle}
