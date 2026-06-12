@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment files (never commit these)
+.env
+.env.local
+.env.production
+.env.example.real
+
+# Build output
+build/
+
+# Windows
+Thumbs.db
